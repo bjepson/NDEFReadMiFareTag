@@ -73,7 +73,7 @@ public class NDEFReadMiFareTagActivity extends Activity {
 
 		if (msgs == null) { // blank tags will give us a null
 			
-			alertMsg("No NDEF messages; is the tag formatted?");
+			alertMsg("Couldn't read the tag; is it tag formatted? Are you holding it still?");
 
 		} else {
 
@@ -86,7 +86,11 @@ public class NDEFReadMiFareTagActivity extends Activity {
 
 					// Retrieve the record's payload and display it.
 					String msg = getText(recs[j].getPayload());
-					alertMsg(msg);
+					if (recs[j].getType()[0] == 'T') {
+						alertMsg(msg);					
+					} else {
+						alertMsg("Sorry, I can only handle text records.");
+					}
 				}
 
 			}
